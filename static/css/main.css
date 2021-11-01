@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+  max-width:300px;
+  margin:auto;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: darkred;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  max-width:50px;
+}
+
+form.example button:hover {
+  background: #222222;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.inner {
+  display: table;
+  margin: 0 auto;
+  margin-top:1%
+}
+
+.outer {
+  width:100%
+}
+
+#inner {
+  display: table;
+  margin: 0 auto;
+  margin-top:0px;
+}
+
+#outer {
+  width:100%
+}
+
+#results {
+  margin-top:10%;
+  margin-bottom:0%;
+}
+
+.document {
+  margin:7%;
+  margin-top:4%;
+  margin-bottom:4%;
+  background:#eeeeee;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#logo {
+  margin-top:10%;
+  color: darkred;
+  font-family: "Times New Roman";
+}
+
+#minilogo {
+  margin-top:3%;
+  color: darkred;
+  font-family: "Times New Roman";
+  font-size: 200%;
+}
+
+#authors {
+  margin-left : 5px;
+}
+
+#prof {
+  margin-left : 5px;
+}
+
+a.linksNoUnderline {
+  text-decoration: none;
+}
+
+.footer {
+  position:absolute;
+  bottom:0;
+  left: 0;
+  right: 0;
+}
+
+.contacts {
+  margin:0.5%;
+  font-size: 77%;
+}
+
+a.emails {
+  color: darkred;
+  text-decoration-color: purple;
+}
+a.emails:hover{
+  color: purple; 
+}
+#right {
+  position:absolute;
+  right:0.5%;
+}

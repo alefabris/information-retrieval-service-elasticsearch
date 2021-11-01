@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Search Engine</title>
+  </head>
+  <body>
+
+    <div class = "outer" id = "outer">
+            <div class = "inner" id = "inner">
+                <a href="/" class = "linksNoUnderline">
+                <h1 id = "minilogo">Information Retrieval</h1>
+                </a>
+                <form action="#" method="post" class = "example">
+	                <p><input type="text" name="query" placeholder="Enter your query"/>
+                        <button type="submit"><i class="fa fa-search"></i></button></p>
+                </form>
+            <p id = "results"> Results for <b>"{{q}}"</b>:</p>
+            </div> 
+    </div>  
+                            
+                {% for d in documents%}
+                    <div class = "document">
+                        <p><a href="{{d['link']}}", style = "color:darkred" >{{d["title"]}}</a></p>
+                        <p>{{d["abs_first"]}}...<a href="{{d['link']}}", style = "color:purple"> see more</a></p> 
+                    </div>
+
+                {% endfor %}
+            
+
+  </body>
+</html>
