@@ -1,6 +1,6 @@
-Per poter effettuare l'indicizzazione è necessario aggiungere il file json contentente la collezione sperimentale nella cartella principale, con il nome "docs1.json"
+To be able to index it is necessary to add the json file containing the experimental collection in the main folder, with the name "docs1.json"
 
-Per poter ripertere gli eperimenti son necessarie le seguenti librerie non già presenti in python3:
+In order to repeat the experiments you need the following libraries not already present in python3:
 subprocess
 pandas
 nltk
@@ -9,7 +9,7 @@ tqdm
 sklearn
 elasticsearch
 
-Per poter avviare la webapp son necessarie le seguenti librerie non già presenti in python3:
+In order to start the web app you need the following libraries not already present in python3:
 elasticsearch
 flask
 
