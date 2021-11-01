@@ -29,7 +29,7 @@ The methods used in this Mini-project, as mentioned above, are BM25 and clusteri
 BM25 is a function of finding a probabilistic model, given by the relationship between the likelihood of the hypothesis that the document is relevant and that that the document is not. The BM25 sorting algorithm therefore weighs the relationship between the document and the query.
 The most common scoring function for BM25 is:
 
-![Figure 1](https://github.com/alefabris/)
+![Figure 1](https://github.com/alefabris/information-retrieval-service-elasticsearch/blob/main/chart/formula1.png)
 
 * *r<sub>i</sub>* - number of documents found containing the i-th term
 * *R* - number of documents found
@@ -57,29 +57,29 @@ The algorithm that defines the partition is the following:
 * **2.** Each document is assigned to a cluster, in particular the specific document is assigned to the cluster identified by the closest centroid (the centroid that minimizes the distance, in our case expressed as Euclidean norm);
 * **3.** The centroids are recalculated: A centroid z<sub>k</sub> of the *k-th* cluster is the midpoint between all the points that represent the objects within the *k-th* cluster in space, namely:
 
-	![Figure 2](https://github.com/alefabris/)
+	![Figure 2](https://github.com/alefabris/information-retrieval-service-elasticsearch/blob/main/chart/formula2.jpg)
   
 	* *x<sub>i</sub>* - object
 	* x<sub>i</sub> - vector representing xi
 	* *I* - event indicator function *x<sub>i</sub>* ∈ *z<sub>k</sub>*
 * **4.** 2-3 iterates until the partition remains unchanged for 2 iterations.
-As a first reordering approach we considered the cluster of relevant documents to be the cluster with more elements, and we ordered the documents by placing the largest clusters first and then sorting the documents within the cluster using the score. As previously stated, being the k-means method a partition method, the number of groups is fixed prior to their creation, therefore to obtain the best possible result using this methodology we have opted for an optimization of this hyperparameter K, precisely we have tried values ​​from 2 to 9. The best result in terms of *map*, that is *Mean Average Precision*, was equal to 2.
-The number of clusters was not the only hyperparameter we optimized, in fact another one we used was *TITLERELEVANCE*; this hyperparameter represents the weight of the title with respect to the abstract of the documents found. We made the choice to insert it because it seemed plausible that the title had a greater relevance than the abstract in terms of retrieval. The best result in terms of map was equal to 1, therefore the hypothesis that the title is more relevant than the abstract has been refuted. The values ​​we entered within the hyperparameter grid were all integers from 0 to 4.
+As a first reordering approach we considered the cluster of relevant documents to be the cluster with more elements, and we ordered the documents by placing the largest clusters first and then sorting the documents within the cluster using the score. As previously stated, being the k-means method a partition method, the number of groups is fixed prior to their creation, therefore to obtain the best possible result using this methodology we have opted for an optimization of this hyperparameter K, precisely we have tried values from 2 to 9. The best result in terms of *map*, that is *Mean Average Precision*, was equal to 2.
+The number of clusters was not the only hyperparameter we optimized, in fact another one we used was *TITLERELEVANCE*; this hyperparameter represents the weight of the title with respect to the abstract of the documents found. We made the choice to insert it because it seemed plausible that the title had a greater relevance than the abstract in terms of retrieval. The best result in terms of map was equal to 1, therefore the hypothesis that the title is more relevant than the abstract has been refuted. The values we entered within the hyperparameter grid were all integers from 0 to 4.
 As a second sorting approach, we opted for a hybrid sorting between the cluster and the BM25. What we did was therefore to take a K equal to 2 (best value found in the previous method) and we identified the best cluster through a summary index, that is the average, to the score attributed. At this point, we have two clusters with two corresponding indexes of synthesis of the score, we therefore know which of the two clusters is the best from the point of view of the *score* (synthesized), we therefore define the cluster with this highest index as the *best cluster* . To the *scores* relating to the documents belonging to the *best cluster*, let's add and multiply two parameters, respectively *alpha* and *beta*.
-As previously done, we built a grid of hyperparameters within which we entered values ​​for alpha, respectively all integers from 0 to 4; as regards beta we used all the values ​​starting from 0.75 up to 2 (with steps of 0.25). The optimized hyperparameters are respectively equal to 2 and 1. Therefore, only the additive constant was significant.
+As previously done, we built a grid of hyperparameters within which we entered values for alpha, respectively all integers from 0 to 4; as regards beta we used all the values starting from 0.75 up to 2 (with steps of 0.25). The optimized hyperparameters are respectively equal to 2 and 1. Therefore, only the additive constant was significant.
 
 
 ## 4. Experiments<a id=ex> </a>
 
 By comparing the precision of the three methods in various numbers of documents, it can be seen that the BM25 method and the hybrid approach are similar in terms of precision; furthermore, the poor precision of the method based on *k-means* is also noted. Below we can see these values in comparison:
 
-![Figure 3](https://github.com/alefabris/)
+![Figure 3](https://github.com/alefabris/information-retrieval-service-elasticsearch/blob/main/chart/figure2.png)
 
-**(a) Precision of Methods**
+Figure 1: *Precision of Methods.*
 
-![Figure 4](https://github.com/alefabris/)
+![Figure 4](https://github.com/alefabris/information-retrieval-service-elasticsearch/blob/main/chart/figure3.png)
 
-**(b) First 20 documents (c) First 100 documents (d) First 1000 documents**
+Figure 2: *Left: First 20 documents. Center: First 100 documents. Right: First 1000 documents.*
 
 As seen from the table and graphs, we obtained a method, using the approach we define as hybrid, with precision very similar to the basic one implemented by *ElasticSearch* through BM25. The method based mainly on k-means, on the other hand, gave disappointing results. That said, we have kept the standard *ElasticSearch* ordering in our *web application*, as the increase in the computational cost to calculate the matrix of styles and to run *k-means* does not generate an increase in performance that justifies its use.
 To reproduce the experiments, your computer must meet certain requirements:
@@ -93,9 +93,9 @@ open the terminal in the folder that contains the *ElasticSearch* installation a
 To reproduce the two experiments, go to the folder entered by us on moodle, click with the right mouse button and open the terminal and execute the following commands:
 * **Index documents within *ElasticSearch*** using the command: ```python3 cv 19index.py```;
 (You only need to do it once) ´
-* **Experiment 1**, that is the search for the best values ​​of *K* and *TITLERELEVANCE* in the sorting described in the first approach, using the command: ```python3 experiment0.py```;
+* **Experiment 1**, that is the search for the best values of *K* and *TITLERELEVANCE* in the sorting described in the first approach, using the command: ```python3 experiment0.py```;
 **ATTENTION: it can take several hours to process** (Note that the results will be printed on the terminal)
-* **Experiment 2**, that is the search for the best *alpha* and *beta* values ​​in the sorting described in the second approach, using the command: ```python3 experiment1.py```;
+* **Experiment 2**, that is the search for the best *alpha* and *beta* values in the sorting described in the second approach, using the command: ```python3 experiment1.py```;
 **ATTENTION: it can take several hours to process** (Note that the results will be printed on the terminal)
 
 
@@ -104,9 +104,9 @@ To reproduce the two experiments, go to the folder entered by us on moodle, clic
 As mentioned initially, we decided to develop a graphical interface, which was developed using *HTML* and *CSS*, while maintaining minimal graphics. In addition to the search bar, we have implemented for example a hypertext link on the writing of the home page: *Information Retrieval* that leads to the *Wikipedia* page of that topic. Also on the *home page*, we have inserted hyperlinks that redirect to our university emails.
 As for the *research page*, we have made the text: *Information Retrieval* clickable, this click takes you back to the home page, like some of the best known IR services. Once a search has been carried out, the first 100 documents found appear on the *research page*. Each document found is presented within a gray rectangle, with slightly rounded corners, within this box there are: *title* and the first 225 characters of the *abstract*, followed by *...see more*. The *title* and *see more* are hyperlinks that refer to the relative web address which contains the entire document found.
 
-![Figure 5](https://github.com/alefabris/)
+![Figure 5](https://github.com/alefabris/information-retrieval-service-elasticsearch/blob/main/chart/figure4.png)
 
-**(e) IR home page (f) IR research page**
+Figure 2: *Left: IR home page. Right: IR research page.*
 
 To use the graphical interface you need to have the *ElasticSearch* server active, go to the folder entered by us on moodle, right-click, open the terminal and execute the following commands:
 * ```python3 cv 19index.py``` (Not needed if you have done this before)
