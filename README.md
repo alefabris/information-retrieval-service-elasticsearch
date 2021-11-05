@@ -18,7 +18,7 @@ The hybrid approach returned similar performance to the BM25, while with the cla
 The main objective of this project is to put into practice the concepts learned in the Databases 2 course and add others learned in other subjects and independently.
 In this project in particular we have deepened the clustering method: in particular trying to exploit the cluster hypotesis, ie that the relevant elements are similar to each other. Clustering was applied to documents retrieved from a query using BM25, the default method applied by Elasticsearch, in order to reorder them and provide the user with the relevant documents faster.
 In addition, we have created a graphical interface for the IR service to provide a minimum level of user experience.
-As far as programming is concerned, the python language was used for the creation of the new *Information Retrieval* methods and for the back-end part of the *Web Application*. The HTML and CSS languages ​​were instead used for the creation of the front-end part of the *Web Application*.
+As far as programming is concerned, the python language was used for the creation of the new *Information Retrieval* methods and for the back-end part of the *Web Application*. The HTML and CSS languages were instead used for the creation of the front-end part of the *Web Application*.
 
 
 ## 2. Starting point<a id=sp> </a>
